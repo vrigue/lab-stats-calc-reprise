@@ -40,18 +40,44 @@ function getAboveBelowMean(nums : number[]) : [number, number] {
 // PART A : Basic Stats
 
 function getMedian(nums : number[]) : number {
-    //Step 1
-    return NaN; // remove me!
+
+    if (nums.length % 2 === 0) {
+        let right : number = Number(nums.length / 2) -1;
+        let left : number = right++;
+        return (nums[right] + nums[left]) / 2;
+    } else {
+        return nums[Math.floor(nums.length / 2)];
+    }
+
 }
 
 function getMinMax(nums : number[]) : [number, number] {
-    //Step 2
-    return [NaN, NaN]; // remove me!
+    
+    let min : number = nums[0];
+    for (const num of nums) {
+        if (num < min)
+            min = num;
+    }
+
+    let max : number = nums[0];
+    for (const num of nums) {
+        if (num > max)
+            max = num;
+    }
+
+    return [min, max]
 }
 
 function getStdDev(nums : number[]) : number {
-    //Step 3
-    return NaN; // remove me!
+    let mean : number = getMean(nums);
+    let squared_distance_mean : number[] = []; 
+
+    for (const num of nums) {
+        let distance : number = (mean - num) ** 2;
+        squared_distance_mean.push(distance);
+    }
+
+    return Math.sqrt(getMean(squared_distance_mean));
 }
 
 let basicStatsAnalyzeButton = document.querySelector("button#analyze") as HTMLButtonElement;
@@ -70,7 +96,20 @@ basicStatsAnalyzeButton.addEventListener("click", function () {
 // PART B: Advanced Integer Stats
 
 function getLeastCommonMultiple(nums : number[]) : number {
-    return NaN; // remove me!
+    
+    let max : number = nums[0];
+    for (const num of nums) {
+        if (num > max)
+            max = num;
+    }
+
+    for (const num of nums) {
+        if (max % num === 0) {
+            continue;
+        } else {
+            
+        }
+    }
 }
 
 function getAllCommonFactors(nums : number[]) : number[] {

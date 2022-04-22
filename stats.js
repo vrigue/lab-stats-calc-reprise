@@ -1,13 +1,12 @@
-"use strict";
 function readAllNumbers() {
-    let textArea = document.querySelector("textarea");
-    let lines = textArea.value.split("\n");
-    let numbers = [];
+    var textArea = document.querySelector("textarea");
+    var lines = textArea.value.split("\n");
+    var numbers = [];
     //Step 4: update to handle multiple numbers on one line
-    for (let i = 0; i < lines.length; i++) {
+    for (var i = 0; i < lines.length; i++) {
         if (lines[i] === "")
             continue;
-        let num = Number(lines[i]);
+        var num = Number(lines[i]);
         if (isNaN(num))
             continue;
         numbers.push(num);
@@ -15,17 +14,19 @@ function readAllNumbers() {
     return numbers;
 }
 function getMean(nums) {
-    let sum = 0;
-    for (const n of nums) {
+    var sum = 0;
+    for (var _i = 0, nums_1 = nums; _i < nums_1.length; _i++) {
+        var n = nums_1[_i];
         sum += n;
     }
     return sum / nums.length;
 }
 function getAboveBelowMean(nums) {
-    let mean = getMean(nums);
-    let aboveCount = 0;
-    let belowCount = 0;
-    for (const n of nums) {
+    var mean = getMean(nums);
+    var aboveCount = 0;
+    var belowCount = 0;
+    for (var _i = 0, nums_2 = nums; _i < nums_2.length; _i++) {
+        var n = nums_2[_i];
         if (n < mean)
             belowCount++;
         else if (n > mean)
@@ -35,27 +36,50 @@ function getAboveBelowMean(nums) {
 }
 // PART A : Basic Stats
 function getMedian(nums) {
-    //Step 1
-    return NaN; // remove me!
+    if (nums.length % 2 === 0) {
+        var right = Number(nums.length / 2) - 1;
+        var left = right++;
+        return (nums[right] + nums[left]) / 2;
+    }
+    else {
+        return nums[Math.floor(nums.length / 2)];
+    }
 }
 function getMinMax(nums) {
-    //Step 2
-    return [NaN, NaN]; // remove me!
+    var min = nums[0];
+    for (var _i = 0, nums_3 = nums; _i < nums_3.length; _i++) {
+        var num = nums_3[_i];
+        if (num < min)
+            min = num;
+    }
+    var max = nums[0];
+    for (var _a = 0, nums_4 = nums; _a < nums_4.length; _a++) {
+        var num = nums_4[_a];
+        if (num > max)
+            max = num;
+    }
+    return [min, max];
 }
 function getStdDev(nums) {
-    //Step 3
-    return NaN; // remove me!
+    var mean = getMean(nums);
+    var squared_distance_mean = [];
+    for (var _i = 0, nums_5 = nums; _i < nums_5.length; _i++) {
+        var num = nums_5[_i];
+        var distance = Math.pow((mean - num), 2);
+        squared_distance_mean.push(distance);
+    }
+    return Math.sqrt(getMean(squared_distance_mean));
 }
-let basicStatsAnalyzeButton = document.querySelector("button#analyze");
+var basicStatsAnalyzeButton = document.querySelector("button#analyze");
 basicStatsAnalyzeButton.addEventListener("click", function () {
-    let numbers = readAllNumbers();
+    var numbers = readAllNumbers();
     //Note: Sorting numbers requires passing a custom comparison function to .sort()
     numbers.sort(function (a, b) { return a - b; });
-    document.querySelector("#mean").textContent = `${getMean(numbers)}`;
-    document.querySelector("#aboveBelow").textContent = `${getAboveBelowMean(numbers).join(" & ")}`;
-    document.querySelector("#median").textContent = `${getMedian(numbers)}`;
-    document.querySelector("#minMax").textContent = `${getMinMax(numbers).join(" & ")}`;
-    document.querySelector("#stdDev").textContent = `${getStdDev(numbers)}`;
+    document.querySelector("#mean").textContent = "".concat(getMean(numbers));
+    document.querySelector("#aboveBelow").textContent = "".concat(getAboveBelowMean(numbers).join(" & "));
+    document.querySelector("#median").textContent = "".concat(getMedian(numbers));
+    document.querySelector("#minMax").textContent = "".concat(getMinMax(numbers).join(" & "));
+    document.querySelector("#stdDev").textContent = "".concat(getStdDev(numbers));
 });
 // PART B: Advanced Integer Stats
 function getLeastCommonMultiple(nums) {
@@ -64,11 +88,11 @@ function getLeastCommonMultiple(nums) {
 function getAllCommonFactors(nums) {
     return [NaN]; // remove me!
 }
-let advancedStatsAnalyzeButton = document.querySelector("button#analyze-advanced");
+var advancedStatsAnalyzeButton = document.querySelector("button#analyze-advanced");
 advancedStatsAnalyzeButton.addEventListener("click", function () {
-    let numbers = readAllNumbers();
+    var numbers = readAllNumbers();
     //Note: Sorting numbers requires passing a custom comparison function to .sort()
     numbers.sort(function (a, b) { return a - b; });
-    document.querySelector("#lcm").textContent = `${getLeastCommonMultiple(numbers)}`;
-    document.querySelector("#factors").textContent = `${getAllCommonFactors(numbers).join(", ")}`;
+    document.querySelector("#lcm").textContent = "".concat(getLeastCommonMultiple(numbers));
+    document.querySelector("#factors").textContent = "".concat(getAllCommonFactors(numbers).join(", "));
 });
