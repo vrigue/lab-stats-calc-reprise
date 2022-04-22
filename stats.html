@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats Calculator</title>
+    
+    <!-- https://materializecss.com/getting-started.html -->
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+                
+</head>
+<body>
+    <!-- Use the Materialize Grid features (https://materializecss.com/grid.html)
+    to responsively arrange the tables side by side on a large screen, 
+    but above and below on a small screen -->
+
+    <div class="container">
+        <h1>Stats Calculator!</h1>
+        <textarea rows="5" style="height: auto"></textarea>
+        <div class="row">
+            <div class="col l6 s12">
+                <!-- https://materializecss.com/table.html -->
+                <table>
+                    <thead>
+                        <th>Basic Stats:</th>
+                        <td><button id="analyze" class="waves-effect waves-light btn">Analyze!</button></td>
+                    </thead>
+                    <tr>
+                        <th>Mean:</th>
+                        <td id="mean">?</td>
+                    </tr>
+                    <tr>
+                        <th># Above & Below Mean:</th>
+                        <td id="aboveBelow">?</td>
+                    </tr>
+                    <tr>
+                        <th>Median:</th>
+                        <td id="median">?</td>
+                    </tr>
+                    <tr>
+                        <th>Min & Max:</th>
+                        <td id="minMax">?</td>
+                    </tr>
+                    <tr>
+                        <th>Std Dev:</th>
+                        <td id="stdDev">?</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col l6 s12">
+                <table>
+                    <thead>
+                        <th>Advanced Integer Stats:</th>
+                        <td><button id="analyze-advanced" class="red waves-effect waves-light btn">Analyze!</button></td>
+                    </thead>
+                    <tr>
+                        <th>Least Common Multiple:</th>
+                        <td id="lcm">?</td>
+                    </tr>
+                    <tr>
+                        <th>Common Factors:</th>
+                        <td id="factors">?</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <script src="stats.js" ></script>
+</body>
+</html>
