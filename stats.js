@@ -64,7 +64,7 @@ function getLeastCommonMultiple(nums) {
 function getAllCommonFactors(nums) {
     return [NaN]; // remove me!
 }
-let advancedStatsAnalyzeButton = document.querySelector("button#analyze");
+let advancedStatsAnalyzeButton = document.querySelector("button#analyze-advanced");
 advancedStatsAnalyzeButton.addEventListener("click", function () {
     let numbers = readAllNumbers();
     //Note: Sorting numbers requires passing a custom comparison function to .sort()

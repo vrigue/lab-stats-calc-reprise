@@ -77,7 +77,7 @@ function getAllCommonFactors(nums : number[]) : number[] {
     return [NaN]; // remove me!
 }
 
-let advancedStatsAnalyzeButton = document.querySelector("button#analyze") as HTMLButtonElement;
+let advancedStatsAnalyzeButton = document.querySelector("button#analyze-advanced") as HTMLButtonElement;
 advancedStatsAnalyzeButton.addEventListener("click", function () {
     let numbers : number[] = readAllNumbers();
     //Note: Sorting numbers requires passing a custom comparison function to .sort()
