@@ -4,12 +4,15 @@ function readAllNumbers() {
     var numbers = [];
     //Step 4: update to handle multiple numbers on one line
     for (var i = 0; i < lines.length; i++) {
-        if (lines[i] === "")
-            continue;
-        var num = Number(lines[i]);
-        if (isNaN(num))
-            continue;
-        numbers.push(num);
+        var elements = lines[i].split(" ");
+        for (var index = 0; index < elements.length; index++) {
+            if (elements[index] === "")
+                continue;
+            var num = Number(elements[index]);
+            if (isNaN(num))
+                continue;
+            numbers.push(num);
+        }
     }
     return numbers;
 }
@@ -19,7 +22,7 @@ function getMean(nums) {
         var n = nums_1[_i];
         sum += n;
     }
-    return sum / nums.length;
+    return Number((sum / nums.length).toFixed(2));
 }
 function getAboveBelowMean(nums) {
     var mean = getMean(nums);
@@ -32,7 +35,7 @@ function getAboveBelowMean(nums) {
         else if (n > mean)
             aboveCount++;
     }
-    return [aboveCount, belowCount];
+    return [Number(aboveCount.toFixed(2)), Number(belowCount.toFixed(2))];
 }
 // PART A : Basic Stats
 function getMedian(nums) {
@@ -42,7 +45,7 @@ function getMedian(nums) {
         return (nums[right] + nums[left]) / 2;
     }
     else {
-        return nums[Math.floor(nums.length / 2)];
+        return Number((nums[Math.floor(nums.length / 2)]).toFixed(2));
     }
 }
 function getMinMax(nums) {
@@ -58,7 +61,7 @@ function getMinMax(nums) {
         if (num > max)
             max = num;
     }
-    return [min, max];
+    return [Number(min.toFixed(2)), Number(max.toFixed(2))];
 }
 function getStdDev(nums) {
     var mean = getMean(nums);
@@ -68,7 +71,7 @@ function getStdDev(nums) {
         var distance = Math.pow((mean - num), 2);
         squared_distance_mean.push(distance);
     }
-    return Math.sqrt(getMean(squared_distance_mean));
+    return Number(Math.sqrt(getMean(squared_distance_mean)).toFixed(2));
 }
 var basicStatsAnalyzeButton = document.querySelector("button#analyze");
 basicStatsAnalyzeButton.addEventListener("click", function () {
@@ -83,10 +86,57 @@ basicStatsAnalyzeButton.addEventListener("click", function () {
 });
 // PART B: Advanced Integer Stats
 function getLeastCommonMultiple(nums) {
-    return NaN; // remove me!
+    var max = nums[0];
+    for (var _i = 0, nums_6 = nums; _i < nums_6.length; _i++) {
+        var num = nums_6[_i];
+        if (num > max)
+            max = num;
+    }
+    var isFinished = false;
+    var i = 0;
+    while (isFinished === false) {
+        if (i === nums.length) {
+            isFinished = true;
+        }
+        else if (max % nums[i] === 0) {
+            i++;
+        }
+        else {
+            i = 0;
+            max++;
+        }
+    }
+    return max;
 }
 function getAllCommonFactors(nums) {
-    return [NaN]; // remove me!
+    var min = nums[0];
+    for (var _i = 0, nums_7 = nums; _i < nums_7.length; _i++) {
+        var num = nums_7[_i];
+        if (num < min)
+            min = num;
+    }
+    var isFinished = false;
+    var i = 0;
+    var commonFactors = [];
+    while (isFinished === false) {
+        if (min === 1) {
+            commonFactors.push(min);
+            isFinished = true;
+        }
+        else if (i === nums.length) {
+            commonFactors.push(min);
+            i = 0;
+            min--;
+        }
+        else if (nums[i] % min === 0) {
+            i++;
+        }
+        else {
+            i = 0;
+            min--;
+        }
+    }
+    return commonFactors;
 }
 var advancedStatsAnalyzeButton = document.querySelector("button#analyze-advanced");
 advancedStatsAnalyzeButton.addEventListener("click", function () {

@@ -6,12 +6,18 @@ function readAllNumbers() : number[] {
     //Step 4: update to handle multiple numbers on one line
 
     for (let i = 0; i < lines.length; i++){
-        if (lines[i] === "")
-            continue;
-        let num = Number(lines[i]);
-        if (isNaN(num))
-            continue;
-        numbers.push(num);
+        let elements : string[] = lines[i].split(" ");
+
+        for (let index = 0; index < elements.length; index++) {
+
+            if (elements[index] === "")
+                continue;
+            let num = Number(elements[index]);
+            if (isNaN(num))
+                continue;
+            
+            numbers.push(num);
+        }
     }
     return numbers;
 }
@@ -21,7 +27,7 @@ function getMean( nums  : number[]) : number {
     for (const n of nums){
         sum += n;
     }
-    return sum / nums.length;
+    return Number((sum / nums.length).toFixed(2));
 }
 
 function getAboveBelowMean(nums : number[]) : [number, number] {
@@ -34,7 +40,7 @@ function getAboveBelowMean(nums : number[]) : [number, number] {
         else if (n > mean)
             aboveCount++;
     }
-    return [aboveCount, belowCount];
+    return [Number(aboveCount.toFixed(2)), Number(belowCount.toFixed(2))];
 }
 
 // PART A : Basic Stats
@@ -46,7 +52,7 @@ function getMedian(nums : number[]) : number {
         let left : number = right++;
         return (nums[right] + nums[left]) / 2;
     } else {
-        return nums[Math.floor(nums.length / 2)];
+        return Number((nums[Math.floor(nums.length / 2)]).toFixed(2));
     }
 
 }
@@ -65,7 +71,7 @@ function getMinMax(nums : number[]) : [number, number] {
             max = num;
     }
 
-    return [min, max]
+    return [Number(min.toFixed(2)), Number(max.toFixed(2))]
 }
 
 function getStdDev(nums : number[]) : number {
@@ -77,7 +83,7 @@ function getStdDev(nums : number[]) : number {
         squared_distance_mean.push(distance);
     }
 
-    return Math.sqrt(getMean(squared_distance_mean));
+    return Number(Math.sqrt(getMean(squared_distance_mean)).toFixed(2));
 }
 
 let basicStatsAnalyzeButton = document.querySelector("button#analyze") as HTMLButtonElement;
@@ -103,17 +109,52 @@ function getLeastCommonMultiple(nums : number[]) : number {
             max = num;
     }
 
-    for (const num of nums) {
-        if (max % num === 0) {
-            continue;
+    let isFinished : boolean = false;
+    let i : number = 0;
+
+    while (isFinished === false) {
+        if (i === nums.length) {
+            isFinished = true;
+        } else if (max % nums[i] === 0) {
+            i++;
         } else {
-            
+            i = 0;
+            max++;   
         }
     }
+
+    return max;
 }
 
 function getAllCommonFactors(nums : number[]) : number[] {
-    return [NaN]; // remove me!
+
+    let min : number = nums[0];
+    for (const num of nums) {
+        if (num < min)
+            min = num;
+    }
+
+    let isFinished : boolean = false;
+    let i : number = 0;
+    let commonFactors : number[] = [];
+
+    while (isFinished === false) {
+        if (min === 1) {
+            commonFactors.push(min);
+            isFinished = true; 
+        } else if (i === nums.length) {
+            commonFactors.push(min);
+            i = 0
+            min--;
+        } else if (nums[i] % min === 0) {
+            i++;
+        } else {
+            i = 0
+            min--;
+        }
+    }
+
+    return commonFactors;
 }
 
 let advancedStatsAnalyzeButton = document.querySelector("button#analyze-advanced") as HTMLButtonElement;
@@ -124,4 +165,5 @@ advancedStatsAnalyzeButton.addEventListener("click", function () {
 
     (document.querySelector("#lcm") as HTMLElement).textContent = `${getLeastCommonMultiple(numbers)}`;
     (document.querySelector("#factors") as HTMLElement).textContent = `${getAllCommonFactors(numbers).join(", ")}`;
-});
+    }
+);
