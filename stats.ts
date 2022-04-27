@@ -12,7 +12,7 @@ function readAllNumbers() : number[] {
 
             if (elements[index] === "")
                 continue;
-            let num = Number(elements[index]);
+            let num : number = Number(elements[index]);
             if (isNaN(num))
                 continue;
             
@@ -48,9 +48,9 @@ function getAboveBelowMean(nums : number[]) : [number, number] {
 function getMedian(nums : number[]) : number {
 
     if (nums.length % 2 === 0) {
-        let right : number = Number(nums.length / 2) -1;
+        let right : number = Number(nums.length / 2) - 1;
         let left : number = right++;
-        return (nums[right] + nums[left]) / 2;
+        return Number(((nums[right] + nums[left]) / 2).toFixed(2));
     } else {
         return Number((nums[Math.floor(nums.length / 2)]).toFixed(2));
     }
@@ -103,11 +103,8 @@ basicStatsAnalyzeButton.addEventListener("click", function () {
 
 function getLeastCommonMultiple(nums : number[]) : number {
     
-    let max : number = nums[0];
-    for (const num of nums) {
-        if (num > max)
-            max = num;
-    }
+    let max_min = getMinMax(nums)
+    let max = max_min[0]
 
     // let isFinished : boolean = false;
     
@@ -147,11 +144,8 @@ function getLeastCommonMultiple(nums : number[]) : number {
 
 function getAllCommonFactors(nums : number[]) : number[] {
 
-    let min : number = nums[0];
-    for (const num of nums) {
-        if (num < min)
-            min = num;
-    }
+    let max_min = getMinMax(nums)
+    let min = max_min[1]
 
     let isFinished : boolean = false;
     let i : number = 0;

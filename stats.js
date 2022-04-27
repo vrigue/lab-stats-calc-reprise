@@ -42,7 +42,7 @@ function getMedian(nums) {
     if (nums.length % 2 === 0) {
         var right = Number(nums.length / 2) - 1;
         var left = right++;
-        return (nums[right] + nums[left]) / 2;
+        return Number(((nums[right] + nums[left]) / 2).toFixed(2));
     }
     else {
         return Number((nums[Math.floor(nums.length / 2)]).toFixed(2));
@@ -86,12 +86,8 @@ basicStatsAnalyzeButton.addEventListener("click", function () {
 });
 // PART B: Advanced Integer Stats
 function getLeastCommonMultiple(nums) {
-    var max = nums[0];
-    for (var _i = 0, nums_6 = nums; _i < nums_6.length; _i++) {
-        var num = nums_6[_i];
-        if (num > max)
-            max = num;
-    }
+    var max_min = getMinMax(nums);
+    var max = max_min[0];
     // let isFinished : boolean = false;
     // while (isFinished === false) {
     //     let isDivisible : boolean = true;
@@ -125,12 +121,8 @@ function getLeastCommonMultiple(nums) {
     return max;
 }
 function getAllCommonFactors(nums) {
-    var min = nums[0];
-    for (var _i = 0, nums_7 = nums; _i < nums_7.length; _i++) {
-        var num = nums_7[_i];
-        if (num < min)
-            min = num;
-    }
+    var max_min = getMinMax(nums);
+    var min = max_min[1];
     var isFinished = false;
     var i = 0;
     var commonFactors = [];
