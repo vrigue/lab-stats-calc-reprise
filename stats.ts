@@ -109,6 +109,25 @@ function getLeastCommonMultiple(nums : number[]) : number {
             max = num;
     }
 
+    // let isFinished : boolean = false;
+    
+    // while (isFinished === false) {
+    //     let isDivisible : boolean = true;
+    //     for (let i = 0; i < nums.length; i++) {
+    //         if (max % nums[i] === 0) {
+    //             continue;
+    //         } else if (max % nums[i] !== 0) {
+    //             max++;
+    //             isDivisible = false;
+    //             break;
+    //         }
+    //     }
+
+    //     if (isDivisible) {
+    //         isFinished = true;
+    //     }
+    // }
+
     let isFinished : boolean = false;
     let i : number = 0;
 

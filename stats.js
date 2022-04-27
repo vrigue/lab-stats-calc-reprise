@@ -92,6 +92,22 @@ function getLeastCommonMultiple(nums) {
         if (num > max)
             max = num;
     }
+    // let isFinished : boolean = false;
+    // while (isFinished === false) {
+    //     let isDivisible : boolean = true;
+    //     for (let i = 0; i < nums.length; i++) {
+    //         if (max % nums[i] === 0) {
+    //             continue;
+    //         } else if (max % nums[i] !== 0) {
+    //             max++;
+    //             isDivisible = false;
+    //             break;
+    //         }
+    //     }
+    //     if (isDivisible) {
+    //         isFinished = true;
+    //     }
+    // }
     var isFinished = false;
     var i = 0;
     while (isFinished === false) {
